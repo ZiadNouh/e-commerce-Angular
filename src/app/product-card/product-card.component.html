@@ -1,11 +1,27 @@
-<div class="card" style="width: 18rem">
-  <img src="..." class="card-img-top" alt="..." />
+<div class="card" style="width: 25rem">
+  @if (product.stock > 10) {
+  <span class="badge rounded-pill text-bg-success">In stock</span>
+
+  }@else if (product.stock <= 10) {
+  <span class="badge rounded-pill text-bg-warning">Limited quantity</span>
+
+  }@else {
+  <span class="badge rounded-pill text-bg-danger">Out of stock</span>
+  }
+  <a class="text-decoration-none text-black" routerLink="/product-details">
+    <img [src]="product.thumbnail" class="card-img-top" [alt]="product.title" />
+  </a>
+
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="d-flex justify-content-between">
+      <a class="text-decoration-none text-black" routerLink="/product-details">
+        <h5 class="card-title">{{ product.title }}</h5>
+      </a>
+      <span class="fw-bold">{{ product.price }}</span>
+    </div>
+    <p class="card-text fw-bold">Rate: {{ product.rating }} / 5.0</p>
+    <a routerLink="/product-details:product.id" class="btn btn-info"
+      >Add to cart</a
+    >
   </div>
 </div>
