@@ -1,19 +1,51 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Home</a>
+    <a
+      class="navbar-brand"
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a
+            class="nav-link"
+            routerLink="/register"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Register
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a
+            class="nav-link"
+            routerLink="/login"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Login
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cart">Cart</a>
+          <a
+            class="nav-link"
+            routerLink="/cart"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Cart
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- 👉The [routerLinkActiveOptions]="{ exact: true }" attribute ensures that the active-link class is applied only when the route matches the routerLink exactly.
+
+This prevents the active-link class from being applied to the Home link (or any other link) when navigating to other routes that don't match exactly. -->
