@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="card mb-3">
     <div class="row g-0">
-      <div class="col-md-6">
+      <div class="col-md-6 d-flex justify-content-center">
         <img
           [src]="productDetails.thumbnail"
           class="img-fluid rounded-start"
@@ -14,15 +14,59 @@
           <p class="card-text">
             {{ productDetails.description }}
           </p>
-          <p>
-            {{ productDetails.rating }}
-            (<span>{{ productDetails.reviews.length }}</span
+          <p class="fw-bold">
+            {{ productDetails.rating }}/5.0 (<span>{{
+              productDetails.reviews.length
+            }}</span
             >)
           </p>
           <hr />
-          <p class="card-text">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
-          </p>
+          @if (productDetails.stock > 10) {
+          <span class="badge rounded-pill text-bg-success p-2 fs-6"
+            >In stock</span
+          ><span class="text-success ms-4 fw-bold fs-5">{{
+            productDetails.stock
+          }}</span
+          ><span class="fw-bold"> item left </span>
+
+          }@else if (productDetails.stock <= 10) {
+          <span class="badge rounded-pill text-bg-warning p-2 fs-6"
+            >Limited quantity</span
+          ><span class="text-warning ms-4 fw-bold fs-5">{{
+            productDetails.stock
+          }}</span
+          ><span class="fw-bold"> item left </span>
+
+          }@else {
+          <span class="badge rounded-pill text-bg-danger p-2 fs-6"
+            >Out of stock</span
+          >
+
+          }
+          <div class="mt-3">
+            <p class="fw-bold fs-5">Tags :</p>
+            @for (tag of productDetails.tags; track $index) {
+            <span
+              class="badge rounded-pill bg-secondary px-3 fs-5 fw-medium me-2"
+              >{{ tag }}</span
+            >
+            }
+          </div>
+        </div>
+        <hr />
+        <div class="mb-3">
+          <button
+            type="button"
+            class="btn btn-success btn-lg px-5 me-4 rounded-pill"
+          >
+            Buy Now
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-success btn-lg rounded-pill"
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>
