@@ -1,1 +1,77 @@
-<p>login works!</p>
+<div class="container w-75 mt-5">
+  <div class="d-flex justify-content-between">
+    <div class="w-50">
+      <h1 class="mb-5">Login</h1>
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="handleLoginSubmit(loginForm)"
+        class="w-100"
+      >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control w-100"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+            ngModel
+            #email="ngModel"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          />
+          @if (email.invalid && email.touched) {
+          <div id="emailHelp" class="form-text text-danger">
+            @if (email.hasError('required')) {
+            <small>required</small>
+            } @if (email.hasError('pattern')) {
+            <small>invalid email</small>
+            }
+          </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control w-100"
+            id="exampleInputPassword1"
+            name="password"
+            ngModel
+            #password="ngModel"
+            required
+          />
+          @if (password.invalid && password.touched) {
+          <div id="password" class="form-text text-danger">
+            @if (password.hasError('required')) {
+            <small>required</small>
+            }
+          </div>
+          }
+        </div>
+        @if (formError) {
+        <div class="alert alert-danger mt-3">
+          {{ formError }}
+        </div>
+        }
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <div class="mt-4">
+        <p>
+          Don't have account?
+          <a routerLink="/register"><span>Register</span></a>
+        </p>
+      </div>
+    </div>
+
+    <img
+      width="50%"
+      src="../../assets/Login-amico.svg"
+      alt="login illustration"
+    />
+  </div>
+</div>
