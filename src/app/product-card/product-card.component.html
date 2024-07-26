@@ -1,12 +1,10 @@
 <div class="card" style="width: 25rem">
   @if (product.stock > 10) {
   <span class="badge rounded-pill text-bg-success">In stock</span>
-
-  }@else if (product.stock <= 10) {
-  <span class="badge rounded-pill text-bg-warning">Limited quantity</span>
-
-  }@else {
+  } @else if (product.stock == 0) {
   <span class="badge rounded-pill text-bg-danger">Out of stock</span>
+  } @else if (product.stock <= 10) {
+  <span class="badge rounded-pill text-bg-warning">Limited quantity</span>
   }
   <a
     class="text-decoration-none text-black"
