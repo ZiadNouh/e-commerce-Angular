@@ -11,4 +11,27 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+  stars: Array<number> = [];
+
+  ngOnInit() {
+    this.stars = this.starsNumber(this.product.rating);
+  }
+
+  starsNumber(rating: number): Array<number> {
+    const stars: Array<number> = [];
+
+    for (let i = 0; i < 5; i++) {
+      if (rating > 1) {
+        stars.push(1);
+        rating--;
+      } else if (rating % 1 !== 0) {
+        stars.push(rating % 1);
+        rating = 0;
+      } else {
+        stars.push(0);
+      }
+    }
+
+    return stars;
+  }
 }
