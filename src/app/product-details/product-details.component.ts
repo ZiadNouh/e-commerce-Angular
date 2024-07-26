@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import productsData from '../../assets/products.json';
 
@@ -7,12 +7,13 @@ import productsData from '../../assets/products.json';
   standalone: true,
   imports: [],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css',
+  styleUrls: ['./product-details.component.css'], // Corrected to 'styleUrls'
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
   products: Array<any> = productsData;
   id!: number;
   productDetails: any;
+  stars: Array<number> = [];
 
   constructor(private activateRoute: ActivatedRoute) {}
 
@@ -22,6 +23,24 @@ export class ProductDetailsComponent {
     this.productDetails = this.products.find(
       (product) => product.id === this.id
     );
-    console.log(this.productDetails);
+    this.stars = this.starsNumber(this.productDetails.rating);
+  }
+
+  starsNumber(rating: number): Array<number> {
+    const stars: Array<number> = [];
+
+    for (let i = 0; i < 5; i++) {
+      if (rating > 1) {
+        stars.push(1);
+        rating--;
+      } else if (rating % 1 !== 0) {
+        stars.push(rating % 1);
+        rating = 0;
+      } else {
+        stars.push(0);
+      }
+    }
+
+    return stars;
   }
 }
