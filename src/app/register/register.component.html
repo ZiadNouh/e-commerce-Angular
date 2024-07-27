@@ -3,8 +3,8 @@
     <div class="w-50">
       <h1 class="mb-5">Register</h1>
       <form
-        #registerForm="ngForm"
-        (ngSubmit)="handleRegisterSubmit(registerForm)"
+        [formGroup]="registerForm"
+        (ngSubmit)="handleRegisterSubmit()"
         class="w-100"
       >
         <div class="mb-3">
@@ -14,14 +14,11 @@
             class="form-control w-100"
             id="exampleInputName1"
             aria-describedby="nameHelp"
-            name="name"
-            ngModel
-            #name="ngModel"
-            required
+            formControlName="name"
           />
-          @if (name.invalid && name.touched) {
+          @if (name?.invalid && name?.touched) {
           <div id="nameHelp" class="form-text text-danger">
-            @if (name.hasError('required')) {
+            @if (name?.hasError('required')) {
             <small>required</small>
             }
           </div>
@@ -29,26 +26,18 @@
         </div>
 
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+          <label for="exampleInputEmail1" class="form-label">Email</label>
           <input
             type="email"
             class="form-control w-100"
-            id="exampleInputEmail1"
+            id="exampleInputEmail"
             aria-describedby="emailHelp"
-            name="email"
-            ngModel
-            #email="ngModel"
-            required
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            formControlName="email"
           />
-          @if (email.invalid && email.touched) {
+          @if (email?.invalid && email?.touched) {
           <div id="emailHelp" class="form-text text-danger">
-            @if (email.hasError('required')) {
+            @if (email?.hasError('required')) {
             <small>required</small>
-            } @if (email.hasError('pattern')) {
-            <small>invalid email</small>
             }
           </div>
           }
@@ -59,16 +48,13 @@
           <input
             type="text"
             class="form-control w-100"
-            id="exampleInputuserName1"
+            id="exampleInputUserName1"
             aria-describedby="userNameHelp"
-            name="userName"
-            ngModel
-            #userName="ngModel"
-            required
+            formControlName="userName"
           />
-          @if (userName.invalid && userName.touched) {
+          @if (userName?.invalid && userName?.touched) {
           <div id="userNameHelp" class="form-text text-danger">
-            @if (userName.hasError('required')) {
+            @if (userName?.hasError('required')) {
             <small>required</small>
             }
           </div>
@@ -81,15 +67,15 @@
             type="password"
             class="form-control w-100"
             id="exampleInputPassword1"
-            name="password"
-            ngModel
-            #password="ngModel"
-            required
+            aria-describedby="password"
+            formControlName="password"
           />
-          @if (password.invalid && password.touched) {
+          @if (password?.invalid && password?.touched) {
           <div id="password" class="form-text text-danger">
-            @if (password.hasError('required')) {
+            @if (password?.hasError('required')) {
             <small>required</small>
+            } @if (password?.hasError('minLength')) {
+            <small>password is too short</small>
             }
           </div>
           }
@@ -103,14 +89,12 @@
             type="password"
             class="form-control w-100"
             id="exampleInputConfirmPassword1"
-            name="confirmPassword"
-            ngModel
-            #confirmPassword="ngModel"
-            required
+            aria-describedby="confirmPasswordHelp"
+            formControlName="confirmPassword"
           />
-          @if (confirmPassword.invalid && confirmPassword.touched) {
-          <div id="confirmPassword" class="form-text text-danger">
-            @if (confirmPassword.hasError('required')) {
+          @if (confirmPassword?.invalid && confirmPassword?.touched) {
+          <div id="confirmPasswordHelp" class="form-text text-danger">
+            @if (confirmPassword?.hasError('required')) {
             <small>required</small>
             }
           </div>
@@ -123,7 +107,13 @@
         </div>
         }
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="registerForm.invalid"
+        >
+          Sign Up
+        </button>
       </form>
       <div class="mt-4">
         <p>

@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
-  NgForm,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -17,16 +15,40 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  gameForm: FormGroup;
+  registerForm: FormGroup;
+
   constructor(private fb: FormBuilder) {
-    this.gameForm = this.fb.group({
+    this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators],
+      email: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required, Validators.minLength(4)],
+      confirmPassword: ['', Validators.required],
     });
   }
 
+  get name() {
+    return this.registerForm.get('name');
+  }
+
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get userName() {
+    return this.registerForm.get('userName');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
+  }
+
   formError: string = '';
-  handleRegisterSubmit(registerForm: NgForm) {
-    console.log(registerForm.form.controls);
+  handleRegisterSubmit() {
+    console.log(this.registerForm.controls);
   }
 }
