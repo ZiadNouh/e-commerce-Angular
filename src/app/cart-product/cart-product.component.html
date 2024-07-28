@@ -10,9 +10,21 @@
   </div>
   <div class="offset-2 col-3 text-center">
     <div class="d-flex justify-content-center align-items-center">
-      <button type="button" class="btn btn-success fw-bold btn-lg">+</button>
-      <p class="px-3 fw-bold mt-3 fs-4">1</p>
-      <button type="button" class="btn btn-outline-secondary py-2 btn-lg">
+      <button
+        type="button"
+        class="btn btn-success fw-bold btn-lg"
+        (click)="updateQuantity(product.id, product.quantity + 1)"
+        [disabled]="product.quantity === product.stock"
+      >
+        +
+      </button>
+      <p class="px-3 fw-bold mt-3 fs-4">{{ product.quantity }}</p>
+      <button
+        type="button"
+        class="btn btn-outline-secondary py-2 btn-lg"
+        (click)="updateQuantity(product.id, product.quantity - 1)"
+        [disabled]="product.quantity === 1"
+      >
         -
       </button>
     </div>

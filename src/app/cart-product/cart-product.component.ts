@@ -25,4 +25,8 @@ export class CartProductComponent {
   removeFromCart(productId: number) {
     this.cartService.removeFromCart(productId);
   }
+
+  updateQuantity(productId: number, quantity: number) {
+    this.cartService.updateQuantity(productId, quantity);
+  }
 }
