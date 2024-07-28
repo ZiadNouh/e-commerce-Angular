@@ -38,6 +38,8 @@
           <div id="emailHelp" class="form-text text-danger">
             @if (email?.hasError('required')) {
             <small>required</small>
+            } @if (email?.hasError('email')) {
+            <small>invalid email format</small>
             }
           </div>
           }
@@ -49,13 +51,17 @@
             type="text"
             class="form-control w-100"
             id="exampleInputUserName1"
-            aria-describedby="userNameHelp"
+            aria-describedby="userName"
             formControlName="userName"
           />
-          @if (userName?.invalid && userName?.touched) {
-          <div id="userNameHelp" class="form-text text-danger">
+          @if ( userName?.touched && userName?.invalid ) {
+          <div id="userName" class="form-text text-danger">
             @if (userName?.hasError('required')) {
             <small>required</small>
+            } @if (userName?.hasError('minlength')) {
+            <small>username is too short</small>
+            } @if (userName?.hasError('pattern')) {
+            <small>username can't contain spaces</small>
             }
           </div>
           }
@@ -70,12 +76,18 @@
             aria-describedby="password"
             formControlName="password"
           />
-          @if (password?.invalid && password?.touched) {
+          @if (password?.touched && password?.invalid ) {
           <div id="password" class="form-text text-danger">
             @if (password?.hasError('required')) {
             <small>required</small>
-            } @if (password?.hasError('minLength')) {
+            } @if (password?.hasError('minlength')) {
             <small>password is too short</small>
+            }@else if (password?.hasError('pattern')) {
+            <small
+              >Password must contain at least one lowercase letter, one
+              uppercase letter, one digit, and one special character
+              ($!%*?&).</small
+            >
             }
           </div>
           }
@@ -96,6 +108,8 @@
           <div id="confirmPasswordHelp" class="form-text text-danger">
             @if (confirmPassword?.hasError('required')) {
             <small>required</small>
+            } @if (confirmPassword?.hasError('mustMatch')) {
+            <small>Passwords must match.</small>
             }
           </div>
           }
@@ -107,13 +121,7 @@
         </div>
         }
 
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="registerForm.invalid"
-        >
-          Sign Up
-        </button>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
       </form>
       <div class="mt-4">
         <p>
