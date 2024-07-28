@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../interface/Product';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../service/cart/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -12,6 +13,12 @@ import { RouterLink } from '@angular/router';
 export class ProductCardComponent {
   @Input() product!: Product;
   stars: Array<number> = [];
+
+  constructor(private cartService: CartService) {}
+
+  addToCart() {
+    this.cartService.addToCart(this.product);
+  }
 
   ngOnInit() {
     this.stars = this.starsNumber(this.product.rating);
