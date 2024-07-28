@@ -13,11 +13,13 @@ export class CartService {
     const currentCart = this.cart.value;
     const existingProduct = currentCart.find((item) => item.id === product.id);
 
-    if (existingProduct) {
+    if (existingProduct && product.quantity < product.stock) {
       existingProduct.quantity += 1;
-    } else {
+    } else if (!existingProduct) {
       product.quantity = 1;
       currentCart.push(product);
+    } else {
+      return;
     }
 
     this.cart.next(currentCart);
