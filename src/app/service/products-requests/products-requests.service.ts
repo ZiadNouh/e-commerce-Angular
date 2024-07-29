@@ -8,10 +8,10 @@ export class ProductsRequestsService {
   constructor(private http: HttpClient) {}
 
   getProductList() {
-    return this.http.get('https://dummyjson.com/products');
+    return this.http.get<any>('https://dummyjson.com/products');
   }
 
   getProductDetails(id: number) {
-    return this.http.get(`https://dummyjson.com/products/${id}`);
+    return this.http.get<any>(`https://dummyjson.com/products/${id}`);
   }
 }

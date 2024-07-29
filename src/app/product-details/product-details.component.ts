@@ -13,9 +13,8 @@ import { Product } from '../interface/Product';
   styleUrls: ['./product-details.component.css'], // Corrected to 'styleUrls'
 })
 export class ProductDetailsComponent {
-  products: any;
   id!: number;
-  productDetails: any;
+  productDetails?: Product | undefined;
   stars: Array<number> = [];
 
   constructor(
@@ -27,14 +26,13 @@ export class ProductDetailsComponent {
   ngOnInit() {
     this.id = +this.activateRoute.snapshot.params['id'];
     console.log(this.id);
-    this.productsRequestService.getProductList().subscribe((res) => {
+    this.productsRequestService.getProductDetails(this.id).subscribe((res) => {
       console.log(res);
-      this.products = res;
+      this.productDetails = res;
+      if (this.productDetails) {
+        this.stars = this.starsNumber(this.productDetails.rating);
+      }
     });
-    this.productDetails = this.products.find(
-      (product: any) => product.id === this.id
-    );
-    this.stars = this.starsNumber(this.productDetails.rating);
   }
   addToCart() {
     this.cartService.addToCart(this.productDetails);

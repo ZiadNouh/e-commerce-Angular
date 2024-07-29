@@ -5,11 +5,14 @@
         <div
           class="d-flex justify-content-center bg-secondary-subtle rounded-3"
         >
-          <img [src]="productDetails.thumbnail" [alt]="productDetails.title" />
+          <img
+            [src]="productDetails?.thumbnail"
+            [alt]="productDetails?.title"
+          />
         </div>
 
         <div class="mt-3 d-flex justify-content-center">
-          @for (image of productDetails.images; track $index) {
+          @for (image of productDetails?.images; track $index) {
 
           <img
             [src]="image"
@@ -21,9 +24,9 @@
       </div>
       <div class="col-md-5">
         <div class="card-body p-0">
-          <h5 class="card-title fs-4">{{ productDetails.title }}</h5>
+          <h5 class="card-title fs-4">{{ productDetails?.title }}</h5>
           <p class="card-text">
-            {{ productDetails.description }}
+            {{ productDetails?.description }}
           </p>
           <p class="fw-bold">
             @for (star of stars; track $index) { @if (star==1) {
@@ -31,12 +34,12 @@
             }@else if (star!==0) {
             <i class="fa-solid fa-star-half-stroke text-success"></i>
             }@else{<i class="fa-regular fa-star text-success"></i> } } (<span>{{
-              productDetails.reviews.length
+              productDetails?.reviews?.length
             }}</span
             >)
           </p>
           <hr />
-          @if (productDetails.stock > 10) {
+          @if (productDetails && (productDetails.stock) > 10) {
           <span class="badge rounded-pill text-bg-success p-2 fs-6"
             >In stock</span
           ><span class="text-success ms-4 fw-bold fs-5">{{
@@ -44,7 +47,7 @@
           }}</span
           ><span class="fw-bold"> item left </span>
 
-          }@else if (productDetails.stock <= 10) {
+          }@else if (productDetails && (productDetails.stock) <= 10) {
           <span class="badge rounded-pill text-bg-warning p-2 fs-6"
             >Limited quantity</span
           ><span class="text-warning ms-4 fw-bold fs-5">{{
@@ -60,7 +63,7 @@
           }
           <div class="mt-3">
             <p class="fw-bold fs-5">Tags :</p>
-            @for (tag of productDetails.tags; track $index) {
+            @for (tag of productDetails?.tags; track $index) {
             <span
               class="badge rounded-pill bg-secondary px-3 fs-5 fw-medium me-2"
               >{{ tag }}</span
