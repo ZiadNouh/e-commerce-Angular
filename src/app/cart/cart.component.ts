@@ -24,9 +24,10 @@ export class CartComponent {
   }
 
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
+    this.totalPrice = parseFloat(
+      this.cartItems
+        .reduce((sum, item) => sum + item.price * item.quantity, 0)
+        .toFixed(2)
     );
   }
 }

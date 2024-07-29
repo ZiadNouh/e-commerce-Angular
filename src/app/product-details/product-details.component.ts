@@ -10,7 +10,7 @@ import { Product } from '../interface/Product';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css'], // Corrected to 'styleUrls'
+  styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
   id!: number;
