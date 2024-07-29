@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import productsData from '../../assets/products.json';
 import { CartService } from '../service/cart/cart.service';
+import { ProductsRequestsService } from '../service/products-requests/products-requests.service';
+import { Product } from '../interface/Product';
 
 @Component({
   selector: 'app-product-details',
@@ -10,22 +12,27 @@ import { CartService } from '../service/cart/cart.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css'], // Corrected to 'styleUrls'
 })
-export class ProductDetailsComponent implements OnInit {
-  products: Array<any> = productsData;
+export class ProductDetailsComponent {
+  products: any;
   id!: number;
   productDetails: any;
   stars: Array<number> = [];
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private productsRequestService: ProductsRequestsService
   ) {}
 
   ngOnInit() {
     this.id = +this.activateRoute.snapshot.params['id'];
     console.log(this.id);
+    this.productsRequestService.getProductList().subscribe((res) => {
+      console.log(res);
+      this.products = res;
+    });
     this.productDetails = this.products.find(
-      (product) => product.id === this.id
+      (product: any) => product.id === this.id
     );
     this.stars = this.starsNumber(this.productDetails.rating);
   }
