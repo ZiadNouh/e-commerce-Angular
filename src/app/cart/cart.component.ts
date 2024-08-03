@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CartProductComponent } from '../cart-product/cart-product.component';
 import { CartService } from '../service/cart/cart.service';
-import { toArray } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
